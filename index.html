@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Babyy kaizzzzhaaa</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -34,7 +34,7 @@
             position: relative;
         }
 
-        /* ===== START SCREEN — MINIMAL HEART (NO ANIMATION) ===== */
+        /* ===== START SCREEN — MINIMAL HEART (MOBILE OPTIMIZED) ===== */
         .heart-container {
             display: flex;
             flex-direction: column;
@@ -48,6 +48,7 @@
             left: 0;
             background: #faf5ff;
             z-index: 10;
+            padding: 20px;
         }
 
         .heart-button {
@@ -59,10 +60,11 @@
             align-items: center;
             justify-content: center;
             outline: none;
+            max-width: 100%;
         }
 
         .heart-button i {
-            font-size: 260px;
+            font-size: min(260px, 70vw);
             color: #ff8fab;
             transition: transform 0.2s ease;
         }
@@ -78,7 +80,7 @@
 
         .heart-text {
             margin-top: 16px;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
             font-weight: 400;
             color: #a06b9a;
             letter-spacing: 3px;
@@ -86,13 +88,15 @@
             padding: 8px 24px;
             border-radius: 40px;
             border: 1.5px solid #ffb8d2;
+            text-align: center;
+            width: fit-content;
         }
 
-        /* ===== HANGING ELEMENT - UPPER RIGHT ===== */
+        /* ===== HANGING ELEMENT - MOBILE FRIENDLY ===== */
         .hanging-container {
             position: fixed;
-            top: 30px;
-            right: 40px;
+            top: max(15px, env(safe-area-inset-top, 15px));
+            right: max(15px, env(safe-area-inset-right, 15px));
             z-index: 50;
             display: flex;
             flex-direction: column;
@@ -119,32 +123,28 @@
             background: #ffd1e0;
             border: 2px solid #e6b0cc;
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            width: 70px;
-            height: 70px;
+            width: clamp(60px, 12vw, 70px);
+            height: clamp(60px, 12vw, 70px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: clamp(30px, 6vw, 36px);
             color: #b35d7c;
             transition: all 0.2s;
         }
 
-        .hanging-container:hover .hanging-ornament {
-            background: #ffd9e7;
-            transform: scale(1.02);
-        }
-
-        /* ===== LARGE SQUARE MESSAGE - COMES DOWN SLOWLY ===== */
+        /* ===== LARGE SQUARE MESSAGE - MOBILE OPTIMIZED ===== */
         .square-message-container {
             position: fixed;
-            top: 130px;
-            right: 40px;
-            width: 400px;
-            max-width: 85vw;
+            top: max(100px, 20vh);
+            right: 50%;
+            transform: translateX(50%);
+            width: min(400px, 90vw);
+            max-width: 90vw;
             background: #f9f1ff;
             border: 2px solid #e3ceec;
-            border-radius: 16px;
-            padding: 35px 30px;
+            border-radius: 20px;
+            padding: clamp(25px, 5vw, 35px) clamp(20px, 4vw, 30px);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -153,11 +153,13 @@
             animation: slideDown 0.7s ease-out forwards;
             transform-origin: top;
             box-shadow: none;
+            left: 50%;
+            right: auto;
         }
 
         @keyframes slideDown {
-            0% { opacity: 0; transform: translateY(-40px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translate(-50%, -40px); }
+            100% { opacity: 1; transform: translate(-50%, 0); }
         }
 
         .square-message {
@@ -168,13 +170,13 @@
         }
 
         .square-heart {
-            font-size: 48px;
+            font-size: clamp(40px, 10vw, 48px);
             color: #c28bb0;
             margin-bottom: 10px;
         }
 
         .square-title {
-            font-size: 1.9rem;
+            font-size: clamp(1.5rem, 6vw, 1.9rem);
             font-weight: 450;
             color: #4a3856;
             letter-spacing: 2px;
@@ -182,26 +184,27 @@
             padding-bottom: 12px;
             margin-bottom: 20px;
             width: 100%;
+            word-break: break-word;
         }
 
         .square-text {
-            font-size: 1.3rem;
-            line-height: 1.7;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            line-height: 1.6;
             color: #3f2e4a;
             font-weight: 350;
             padding: 10px 0;
             width: 100%;
             transition: opacity 0.2s;
+            word-break: break-word;
         }
 
-        /* secret button — clean, no icons */
         .another-secret-btn {
             margin-top: 20px;
             background: transparent;
             border: 1.5px solid #d4b0c9;
             border-radius: 40px;
-            padding: 10px 26px;
-            font-size: 1.1rem;
+            padding: clamp(8px, 2vw, 10px) clamp(20px, 5vw, 26px);
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
             color: #69497b;
             display: inline-flex;
             align-items: center;
@@ -209,12 +212,8 @@
             gap: 8px;
             cursor: pointer;
             transition: background 0.1s;
-            border: 1.5px solid #d4b0c9;
             min-width: 140px;
-        }
-
-        .another-secret-btn:hover {
-            background: #f1e2fa;
+            width: fit-content;
         }
 
         .second-secret {
@@ -227,22 +226,17 @@
             animation: fadeSecret 0.5s;
             background: transparent;
             border: none;
-            border-radius: 0;
         }
 
         .second-secret p {
-            font-size: 1.3rem;
-            line-height: 1.7;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            line-height: 1.6;
             color: #3f2e4a;
             font-weight: 350;
             padding: 10px 0;
             width: 100%;
             margin: 0;
-        }
-
-        @keyframes fadeSecret {
-            0% { opacity: 0; transform: scale(0.98); }
-            100% { opacity: 1; transform: scale(1); }
+            word-break: break-word;
         }
 
         .square-close {
@@ -250,8 +244,8 @@
             background: transparent;
             border: 1.5px solid #cba9d4;
             border-radius: 40px;
-            padding: 10px 28px;
-            font-size: 1rem;
+            padding: clamp(8px, 2vw, 10px) clamp(20px, 5vw, 28px);
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
             color: #58446b;
             display: inline-flex;
             align-items: center;
@@ -260,15 +254,7 @@
             transition: background 0.1s;
         }
 
-        .square-close:hover {
-            background: #f3e6fc;
-        }
-
-        .square-close i {
-            color: #a276a8;
-        }
-
-        /* ===== MAIN MESSAGE POPUP - FIXED TITLE ===== */
+        /* ===== MAIN MESSAGE POPUP - FULLY MOBILE OPTIMIZED ===== */
         .message-popup {
             position: fixed;
             top: 0;
@@ -281,7 +267,7 @@
             align-items: center;
             justify-content: center;
             z-index: 100;
-            padding: 24px;
+            padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
             overflow-y: auto;
             animation: fadeIn 0.3s ease;
         }
@@ -293,17 +279,17 @@
 
         .minimal-paper {
             background: #f1e6fa;
-            width: 90%;
-            max-width: 900px;
-            border-radius: 32px;
-            padding: 50px 40px;
+            width: 100%;
+            max-width: min(900px, 95vw);
+            border-radius: clamp(24px, 5vw, 32px);
+            padding: clamp(30px, 6vw, 50px) clamp(20px, 5vw, 40px);
             border: 1.5px solid #dcc5ec;
             color: #2d2538;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            margin: 20px;
+            margin: 10px;
             animation: gentleRise 0.4s ease;
             box-shadow: none;
         }
@@ -314,20 +300,20 @@
         }
 
         .pop-heart {
-            font-size: 70px;
+            font-size: clamp(50px, 15vw, 70px);
             color: #ff8fab;
             margin-bottom: 5px;
         }
 
-        /* ===== COMPLETELY FIXED TITLE ===== */
+        /* ===== PERFECTLY CENTERED TITLE - 100% VISIBLE ON MOBILE ===== */
         .pop-title {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 6vw, 1.8rem);
             font-weight: 600;
             color: #4a3856;
             letter-spacing: 1px;
             border-bottom: 2px solid #e5cfe6;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
+            padding-bottom: clamp(10px, 2vw, 12px);
+            margin-bottom: clamp(10px, 2vw, 15px);
             width: 100%;
             word-wrap: break-word;
             word-break: break-word;
@@ -338,42 +324,44 @@
             text-overflow: clip;
             height: auto;
             min-height: fit-content;
+            text-align: center;
         }
 
         .pop-message {
-            font-size: 1.2rem;
+            font-size: clamp(0.95rem, 4vw, 1.2rem);
             line-height: 1.6;
             color: #3f2e4a;
-            padding: 25px 15px;
+            padding: clamp(15px, 4vw, 25px) clamp(10px, 3vw, 15px);
             margin: 10px 0;
             width: 100%;
             border-top: 1px solid #e2d0ea;
             border-bottom: 1px solid #e2d0ea;
             font-weight: 350;
             text-align: left;
+            word-break: break-word;
         }
 
         .pop-music {
             margin-top: 15px;
             width: 100%;
             background: transparent;
-            padding: 15px 15px;
+            padding: 15px 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: clamp(10px, 3vw, 15px);
             color: #584563;
             border-top: 1px solid #dcc5ec;
             flex-wrap: wrap;
         }
 
         .pop-music i {
-            font-size: 36px;
+            font-size: clamp(30px, 8vw, 36px);
             color: #b28bbd;
         }
 
         audio {
-            width: 250px;
+            width: min(250px, 60vw);
             height: 45px;
             border-radius: 30px;
             background: #ffffff;
@@ -383,17 +371,16 @@
         .music-link {
             color: #69497b;
             background: #f0e2ff;
-            padding: 8px 20px;
+            padding: clamp(6px, 2vw, 8px) clamp(15px, 5vw, 20px);
             border-radius: 50px;
             text-decoration: none;
             font-weight: 500;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
             border: 1px solid #d2b0e0;
             transition: background 0.1s;
-        }
-
-        .music-link:hover {
-            background: #e6d1f2;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .close-btn {
@@ -401,8 +388,8 @@
             background: transparent;
             border: 1.5px solid #cba9d4;
             border-radius: 60px;
-            padding: 12px 32px;
-            font-size: 1.2rem;
+            padding: clamp(10px, 2.5vw, 12px) clamp(24px, 6vw, 32px);
+            font-size: clamp(1rem, 4vw, 1.2rem);
             color: #58446b;
             display: inline-flex;
             align-items: center;
@@ -412,21 +399,92 @@
             letter-spacing: 1px;
         }
 
-        .close-btn:hover {
-            background: #f3e6fc;
-        }
-
         body.popup-visible {
             overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
         }
 
+        /* Mobile-specific optimizations */
         @media (max-width: 700px) {
-            .heart-button i { font-size: 200px; }
-            .pop-title { font-size: 1.5rem; }
-            .pop-message { font-size: 1rem; }
-            .minimal-paper { padding: 35px 20px; }
-            .hanging-container { top: 15px; right: 20px; }
-            .square-message-container { right: 20px; width: 320px; }
+            .heart-button i { 
+                font-size: min(200px, 65vw); 
+            }
+            
+            .pop-title { 
+                font-size: 1.5rem; 
+            }
+            
+            .pop-message { 
+                font-size: 1rem; 
+            }
+            
+            .minimal-paper { 
+                padding: 30px 20px; 
+                margin: 10px;
+            }
+            
+            .hanging-container { 
+                top: 15px; 
+                right: 15px; 
+            }
+            
+            .square-message-container { 
+                width: 90vw; 
+                padding: 25px 20px;
+            }
+
+            .square-title {
+                font-size: 1.6rem;
+            }
+
+            .square-text {
+                font-size: 1.1rem;
+            }
+
+            .another-secret-btn {
+                min-width: 120px;
+                padding: 8px 20px;
+            }
+
+            audio {
+                width: 200px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 380px) {
+            .pop-title { 
+                font-size: 1.3rem; 
+            }
+            
+            .pop-message { 
+                font-size: 0.95rem; 
+                padding: 15px 10px;
+            }
+
+            .minimal-paper { 
+                padding: 25px 15px; 
+            }
+
+            .pop-heart {
+                font-size: 50px;
+            }
+
+            audio {
+                width: 170px;
+            }
+
+            .music-link {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+
+            .close-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -449,7 +507,7 @@
             </div>
         </div>
 
-        <!-- ========== LARGE SQUARE MESSAGE ========= -->
+        <!-- ========== LARGE SQUARE MESSAGE - CENTERED ON MOBILE ========= -->
         <div id="squareMessage" class="square-message-container">
             <div class="square-message">
                 <div class="square-heart">
@@ -485,14 +543,14 @@
             </div>
         </div>
 
-        <!-- ========== MAIN MESSAGE POPUP - NO AUTOPLAY ========= -->
+        <!-- ========== MAIN MESSAGE POPUP - PERFECTLY CENTERED ON MOBILE ========= -->
         <div id="messagePopup" class="message-popup">
             <div class="minimal-paper">
                 <div class="pop-heart">
                     <i class="fas fa-heart"></i>
                 </div>
                 
-                <!-- FIXED: Title broken into two lines -->
+                <!-- TITLE - 100% VISIBLE AND CENTERED ON ALL DEVICES -->
                 <div class="pop-title">
                     Happy Monthsarry<br>babyyykaiii!!🥰😍😘💕💗🙊
                 </div>
@@ -580,15 +638,9 @@
             });
 
             // ===== NO AUTOPLAY =====
-            // Heart click only opens popup — does NOT play music
             heartBtn.addEventListener('click', function() {
                 popup.style.display = 'flex';
                 body.classList.add('popup-visible');
-                
-                // AUTOPLAY REMOVED — music will NOT play automatically
-                // if (audio) {
-                //     audio.play().catch(e => {});
-                // }
                 
                 if (window.navigator && window.navigator.vibrate) {
                     window.navigator.vibrate(12);
@@ -605,14 +657,11 @@
                 }
             });
 
-            // Audio setup - NO autoplay attributes
+            // Audio setup
             const audioEl = document.getElementById('monthsarryAudio');
-            
-            // Remove any autoplay attributes
             audioEl.removeAttribute('autoplay');
             audioEl.autoplay = false;
             
-            // Clear and set sources
             audioEl.innerHTML = '';
             const src1 = document.createElement('source');
             src1.src = 'pasilyo.mp3';
@@ -624,12 +673,11 @@
             audioEl.appendChild(src2);
             audioEl.load();
 
-            // Play button - manual play only
             const playLink = document.querySelector('.music-link');
             if (playLink) {
                 playLink.addEventListener('click', function(e) {
                     e.preventDefault();
-                    audio.play().catch(e => console.log('User must interact first'));
+                    audio.play().catch(e => console.log('Click play manually'));
                 });
             }
 
