@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babyy kaizzzzhaaa</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf5ff;
+            font-family: 'Inter', 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .app {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* ===== START SCREEN — MINIMAL HEART (NO ANIMATION) ===== */
+        .heart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            transition: opacity 0.4s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #faf5ff;
+            z-index: 10;
+        }
+
+        .heart-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+        }
+
+        .heart-button i {
+            font-size: 260px;
+            color: #ff8fab;
+            transition: transform 0.2s ease;
+        }
+
+        .heart-button:hover i {
+            transform: scale(1.02);
+            color: #ff7a9e;
+        }
+
+        .heart-button:active i {
+            transform: scale(0.96);
+        }
+
+        .heart-text {
+            margin-top: 16px;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #a06b9a;
+            letter-spacing: 3px;
+            background: transparent;
+            padding: 8px 24px;
+            border-radius: 40px;
+            border: 1.5px solid #ffb8d2;
+        }
+
+        /* ===== HANGING ELEMENT - UPPER RIGHT ===== */
+        .hanging-container {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .hanging-string {
+            width: 2px;
+            height: 50px;
+            background: #c9a9c9;
+            transition: height 0.3s ease;
+        }
+
+        .hanging-knot {
+            width: 12px;
+            height: 12px;
+            background: #b28bbd;
+            border-radius: 50%;
+            margin-bottom: 4px;
+        }
+
+        .hanging-ornament {
+            background: #ffd1e0;
+            border: 2px solid #e6b0cc;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #b35d7c;
+            transition: all 0.2s;
+        }
+
+        .hanging-container:hover .hanging-ornament {
+            background: #ffd9e7;
+            transform: scale(1.02);
+        }
+
+        /* ===== LARGE SQUARE MESSAGE - COMES DOWN SLOWLY ===== */
+        .square-message-container {
+            position: fixed;
+            top: 130px;
+            right: 40px;
+            width: 400px;
+            max-width: 85vw;
+            background: #f9f1ff;
+            border: 2px solid #e3ceec;
+            border-radius: 16px;
+            padding: 35px 30px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 45;
+            animation: slideDown 0.7s ease-out forwards;
+            transform-origin: top;
+            box-shadow: none;
+        }
+
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .square-message {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .square-heart {
+            font-size: 48px;
+            color: #c28bb0;
+            margin-bottom: 10px;
+        }
+
+        .square-title {
+            font-size: 1.9rem;
+            font-weight: 450;
+            color: #4a3856;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #e5cfe6;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .square-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #3f2e4a;
+            font-weight: 350;
+            padding: 10px 0;
+            width: 100%;
+            transition: opacity 0.2s;
+        }
+
+        /* secret button — clean, no icons */
+        .another-secret-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1.5px solid #d4b0c9;
+            border-radius: 40px;
+            padding: 10px 26px;
+            font-size: 1.1rem;
+            color: #69497b;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background 0.1s;
+            border: 1.5px solid #d4b0c9;
+            min-width: 140px;
+        }
+
+        .another-secret-btn:hover {
+            background: #f1e2fa;
+        }
+
+        .second-secret {
+            display: none;
+            margin-top: 25px;
+            padding: 10px 0;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeSecret 0.5s;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+
+        .second-secret p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #3f2e4a;
+            font-weight: 350;
+            padding: 10px 0;
+            width: 100%;
+            margin: 0;
+        }
+
+        @keyframes fadeSecret {
+            0% { opacity: 0; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .square-close {
+            margin-top: 30px;
+            background: transparent;
+            border: 1.5px solid #cba9d4;
+            border-radius: 40px;
+            padding: 10px 28px;
+            font-size: 1rem;
+            color: #58446b;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+
+        .square-close:hover {
+            background: #f3e6fc;
+        }
+
+        .square-close i {
+            color: #a276a8;
+        }
+
+        /* ===== MAIN MESSAGE POPUP - FIXED TITLE ===== */
+        .message-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #faf5ff;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 24px;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .minimal-paper {
+            background: #f1e6fa;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 32px;
+            padding: 50px 40px;
+            border: 1.5px solid #dcc5ec;
+            color: #2d2538;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 20px;
+            animation: gentleRise 0.4s ease;
+            box-shadow: none;
+        }
+
+        @keyframes gentleRise {
+            0% { transform: translateY(15px); opacity: 0.8; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .pop-heart {
+            font-size: 70px;
+            color: #ff8fab;
+            margin-bottom: 5px;
+        }
+
+        /* ===== COMPLETELY FIXED TITLE ===== */
+        .pop-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4a3856;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #e5cfe6;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            width: 100%;
+            word-wrap: break-word;
+            word-break: break-word;
+            white-space: normal;
+            line-height: 1.4;
+            display: block;
+            overflow: visible;
+            text-overflow: clip;
+            height: auto;
+            min-height: fit-content;
+        }
+
+        .pop-message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #3f2e4a;
+            padding: 25px 15px;
+            margin: 10px 0;
+            width: 100%;
+            border-top: 1px solid #e2d0ea;
+            border-bottom: 1px solid #e2d0ea;
+            font-weight: 350;
+            text-align: left;
+        }
+
+        .pop-music {
+            margin-top: 15px;
+            width: 100%;
+            background: transparent;
+            padding: 15px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: #584563;
+            border-top: 1px solid #dcc5ec;
+            flex-wrap: wrap;
+        }
+
+        .pop-music i {
+            font-size: 36px;
+            color: #b28bbd;
+        }
+
+        audio {
+            width: 250px;
+            height: 45px;
+            border-radius: 30px;
+            background: #ffffff;
+            border: 1px solid #d1bedb;
+        }
+
+        .music-link {
+            color: #69497b;
+            background: #f0e2ff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            border: 1px solid #d2b0e0;
+            transition: background 0.1s;
+        }
+
+        .music-link:hover {
+            background: #e6d1f2;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1.5px solid #cba9d4;
+            border-radius: 60px;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            color: #58446b;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.1s;
+            letter-spacing: 1px;
+        }
+
+        .close-btn:hover {
+            background: #f3e6fc;
+        }
+
+        body.popup-visible {
+            overflow: hidden;
+        }
+
+        @media (max-width: 700px) {
+            .heart-button i { font-size: 200px; }
+            .pop-title { font-size: 1.5rem; }
+            .pop-message { font-size: 1rem; }
+            .minimal-paper { padding: 35px 20px; }
+            .hanging-container { top: 15px; right: 20px; }
+            .square-message-container { right: 20px; width: 320px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- ========== START: MINIMAL HEART ========= -->
+        <div id="heartStart" class="heart-container">
+            <button id="heartOpenBtn" class="heart-button">
+                <i class="fas fa-heart"></i>
+            </button>
+            <span class="heart-text">Touch my heart🥰🥰🙂‍↔️</span>
+        </div>
+
+        <!-- ========== HANGING ELEMENT - UPPER RIGHT ========= -->
+        <div id="hangingTrigger" class="hanging-container">
+            <div class="hanging-knot"></div>
+            <div id="hangingString" class="hanging-string"></div>
+            <div class="hanging-ornament">
+                <i class="fas fa-envelope"></i>
+            </div>
+        </div>
+
+        <!-- ========== LARGE SQUARE MESSAGE ========= -->
+        <div id="squareMessage" class="square-message-container">
+            <div class="square-message">
+                <div class="square-heart">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="square-title">
+                    WAAAAHH
+                </div>
+                
+                <div id="firstSecretText" class="square-text">
+                    Pag nakita mo to <br>
+                    akin ka na habang buhay😜😜 <br>
+                    Bawal umayaw😜 <br>
+                    <span style="display:block; margin-top:20px; font-size:2rem;">🥰</span>
+                </div>
+                
+                <button id="anotherSecretBtn" class="another-secret-btn">
+                    ANO ITUHH🙀🙀
+                </button>
+                
+                <div id="secondSecretDiv" class="second-secret">
+                    <p>
+                       I'll be honest <br>
+                       I have to use ai for some functions po<br>
+                        kasi nalilito talaga ako fr😭😭😭 <br>
+                        😭😭😭😭😭😭😭😭😭😭
+                    </p>
+                </div>
+                
+                <button id="squareCloseBtn" class="square-close">
+                    <i class="fas fa-arrow-up"></i> isara🥰
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== MAIN MESSAGE POPUP - NO AUTOPLAY ========= -->
+        <div id="messagePopup" class="message-popup">
+            <div class="minimal-paper">
+                <div class="pop-heart">
+                    <i class="fas fa-heart"></i>
+                </div>
+                
+                <!-- FIXED: Title broken into two lines -->
+                <div class="pop-title">
+                    Happy Monthsarry<br>babyyykaiii!!🥰😍😘💕💗🙊
+                </div>
+                
+                <div class="pop-message">
+                    Dear kai, <br><br>
+                    I'm happy na kahit ang tagal kitang hindi nabati sa monthsarry natin, ngayon ay nangyari na! <br><br>
+                    I will love you forever kai! Sana umabot na talaga tayo hanggang pagtanda. Bago mangyari iyan, dapat pag-usapan natin ng mabuti ang mga problema natin at dapat hindi po natin ituturing na kaaway ang isa't isa. Tandaan mo na tayong dalawa lang ang magkakampi, bahala sila d'yan. <br><br>
+                    First time ko lang gumawa nang ganito baby, sana magustuhan mo! I Love You sooo muchiieee😍😍😍😘<br>
+                    <span style="font-size:2.8rem; display:block; margin-top:15px; color:#c08eb5;">💗💓💞💕</span>
+                    <br> Sending virtual kisses kasi anlayo natin 😭😭
+                </div>
+                
+                <div class="pop-music">
+                    <i class="fas fa-music"></i>
+                    <audio id="monthsarryAudio" controls loop>
+                        <source src="pasilyo.mp3" type="audio/mpeg">
+                        <source src="https://www.soundjay.com/misc/sounds/bell-meditation-01.ogg" type="audio/ogg">
+                    </audio>
+                    <a href="#" class="music-link" onclick="document.getElementById('monthsarryAudio').play(); return false;">
+                        <i class="fas fa-play"></i> play
+                    </a>
+                </div>
+                
+                <button id="closePopupBtn" class="close-btn">
+                    <i class="fas fa-arrow-left"></i> balik ikaw 
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+
+            const heartBtn = document.getElementById('heartOpenBtn');
+            const popup = document.getElementById('messagePopup');
+            const closeBtn = document.getElementById('closePopupBtn');
+            const audio = document.getElementById('monthsarryAudio');
+            const body = document.body;
+            
+            const hangingTrigger = document.getElementById('hangingTrigger');
+            const squareMessage = document.getElementById('squareMessage');
+            const squareCloseBtn = document.getElementById('squareCloseBtn');
+            const hangingString = document.getElementById('hangingString');
+            
+            const anotherSecretBtn = document.getElementById('anotherSecretBtn');
+            const secondSecretDiv = document.getElementById('secondSecretDiv');
+            const firstSecretText = document.getElementById('firstSecretText');
+
+            hangingTrigger.addEventListener('click', function() {
+                hangingString.style.height = '85px';
+                squareMessage.style.display = 'flex';
+                secondSecretDiv.style.display = 'none';
+                firstSecretText.style.display = 'block';
+                anotherSecretBtn.textContent = 'ANO ITUHH🙀🙀';
+                
+                if (window.navigator && window.navigator.vibrate) {
+                    window.navigator.vibrate(10);
+                }
+            });
+
+            anotherSecretBtn.addEventListener('click', function() {
+                if (secondSecretDiv.style.display === 'none' || secondSecretDiv.style.display === '') {
+                    secondSecretDiv.style.display = 'flex';
+                    firstSecretText.style.display = 'none';
+                    anotherSecretBtn.textContent = 'show first';
+                } else {
+                    secondSecretDiv.style.display = 'none';
+                    firstSecretText.style.display = 'block';
+                    anotherSecretBtn.textContent = 'ANO ITUHH🙀🙀';
+                }
+                
+                if (window.navigator && window.navigator.vibrate) {
+                    window.navigator.vibrate(8);
+                }
+            });
+
+            squareCloseBtn.addEventListener('click', function() {
+                squareMessage.style.display = 'none';
+                hangingString.style.height = '50px';
+                secondSecretDiv.style.display = 'none';
+                firstSecretText.style.display = 'block';
+                anotherSecretBtn.textContent = 'ANO ITUHH🙀🙀';
+            });
+
+            // ===== NO AUTOPLAY =====
+            // Heart click only opens popup — does NOT play music
+            heartBtn.addEventListener('click', function() {
+                popup.style.display = 'flex';
+                body.classList.add('popup-visible');
+                
+                // AUTOPLAY REMOVED — music will NOT play automatically
+                // if (audio) {
+                //     audio.play().catch(e => {});
+                // }
+                
+                if (window.navigator && window.navigator.vibrate) {
+                    window.navigator.vibrate(12);
+                }
+            });
+
+            closeBtn.addEventListener('click', function() {
+                popup.style.display = 'none';
+                body.classList.remove('popup-visible');
+                
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            });
+
+            // Audio setup - NO autoplay attributes
+            const audioEl = document.getElementById('monthsarryAudio');
+            
+            // Remove any autoplay attributes
+            audioEl.removeAttribute('autoplay');
+            audioEl.autoplay = false;
+            
+            // Clear and set sources
+            audioEl.innerHTML = '';
+            const src1 = document.createElement('source');
+            src1.src = 'pasilyo.mp3';
+            src1.type = 'audio/mpeg';
+            const src2 = document.createElement('source');
+            src2.src = 'https://www.soundjay.com/misc/sounds/bell-meditation-01.ogg';
+            src2.type = 'audio/ogg';
+            audioEl.appendChild(src1);
+            audioEl.appendChild(src2);
+            audioEl.load();
+
+            // Play button - manual play only
+            const playLink = document.querySelector('.music-link');
+            if (playLink) {
+                playLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    audio.play().catch(e => console.log('User must interact first'));
+                });
+            }
+
+            secondSecretDiv.style.display = 'none';
+            firstSecretText.style.display = 'block';
+            anotherSecretBtn.textContent = 'ANO ITUHH🙀🙀';
+        })();
+    </script>
+
+    <style>
+        .minimal-paper, .pop-music, .close-btn, .music-link, audio,
+        .square-message-container, .hanging-ornament, .second-secret {
+            box-shadow: none !important;
+        }
+        body, .heart-container, .message-popup {
+            background: #faf5ff;
+        }
+        .square-message-container {
+            background: #f9f1ff;
+        }
+        .another-secret-btn i {
+            display: none;
+        }
+        .heart-button i {
+            animation: none;
+        }
+    </style>
+</body>
+</html>
